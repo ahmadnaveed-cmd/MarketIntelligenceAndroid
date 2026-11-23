@@ -35,8 +35,12 @@ jobs:
         with:
           gradle-version: '8.9'
 
+
+        
       - name: Build Debug APK
-        run: gradle assembleDebug
+        run: |
+          echo -e "\ntasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach { kotlinOptions { jvmTarget = '1.8' } }" >> app/build.gradle
+          gradle assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
